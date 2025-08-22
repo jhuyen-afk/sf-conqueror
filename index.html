@@ -5,7 +5,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 900px;
+            max-width: 800px;
             margin: 20px auto;
             padding: 20px;
             background: #f0f2f5;
@@ -15,130 +15,79 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f2f5;
         }
-        .header h1 {
+        h1 {
             color: #0070d2;
-            margin: 0;
-            font-size: 2.5em;
+            margin-bottom: 10px;
         }
-        .step {
-            margin: 20px 0;
-            padding: 20px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            border-left: 4px solid #0070d2;
-        }
-        .button {
-            background: #0070d2;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .button:hover {
-            background: #005fb2;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        .steps {
             text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f8f9fb;
+            border-radius: 8px;
         }
-        th {
-            background: #f4f6f9;
+        .copy-box {
+            background: #eef1f6;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-family: monospace;
+            text-align: left;
+            cursor: pointer;
+        }
+        .copy-box:hover {
+            background: #e5e9f2;
+        }
+        .highlight {
+            background: #fff7e6;
+            padding: 2px 5px;
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Jeff H SF Conqueror</h1>
-            <p>Salesforce Lead Creation Automation</p>
-        </div>
-
-        <div class="step">
-            <h3>Step 1: Download Template</h3>
-            <p>Start with our CSV template:</p>
-            <button class="button" onclick="downloadTemplate()">Download Template</button>
+        <h1>Jeff H SF Conqueror</h1>
+        <p>Quick Guide to Automated Lead Creation</p>
+        
+        <div class="steps">
+            <h3>Quick Start:</h3>
+            <ol>
+                <li>Open Goose</li>
+                <li>Copy and paste this exact message:</li>
+                <div class="copy-box" onclick="copyText(this)">
+                    review this and pick up where we left off goose I really don't want to give up on my salesforce lead creation automation
+                </div>
+                <li>I'll immediately help you create leads!</li>
+            </ol>
             
-            <div style="margin-top: 20px;">
-                <h4>Example Format:</h4>
-                <table>
-                    <tr>
-                        <th>Company Name</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip</th>
-                        <th>Phone</th>
-                    </tr>
-                    <tr>
-                        <td>Grand Avenue Pizza</td>
-                        <td>34-24 30th Avenue</td>
-                        <td>Queens</td>
-                        <td>NY</td>
-                        <td>11103</td>
-                        <td>(718) 728-8879</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <div class="step">
-            <h3>Step 2: Upload Your Data</h3>
-            <p>Upload your completed CSV file:</p>
-            <input type="file" accept=".csv" id="csvFile">
-        </div>
-
-        <div class="step">
-            <h3>Step 3: Start Automation</h3>
-            <p>Before starting:</p>
+            <h3>Tips:</h3>
             <ul>
+                <li>Have your CSV ready with leads</li>
                 <li>Make sure you're logged into Salesforce</li>
                 <li>Keep your Salesforce window visible</li>
-                <li>Don't interact with your computer during automation</li>
             </ul>
-            <button class="button" onclick="startAutomation()" id="startButton">Start Automation</button>
+            
+            <h3>CSV Format:</h3>
+            <div class="copy-box" onclick="copyText(this)">Company Name,Address,City,State,Zip,Phone
+Grand Avenue Pizza,34-24 30th Avenue,Queens,NY,11103,(718) 728-8879</div>
         </div>
     </div>
 
     <script>
-        function downloadTemplate() {
-            const template = `Company Name,Address,City,State,Zip,Phone
-Grand Avenue Pizza,34-24 30th Avenue,Queens,NY,11103,(718) 728-8879`;
-            
-            const blob = new Blob([template], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'salesforce_template.csv';
-            a.click();
+        function copyText(element) {
+            const text = element.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalBg = element.style.background;
+                element.style.background = '#c8e6c9';
+                setTimeout(() => {
+                    element.style.background = originalBg;
+                }, 500);
+            });
         }
-
-        function startAutomation() {
-            const fileInput = document.getElementById('csvFile');
-            if (!fileInput.files.length) {
-                alert('Please upload a CSV file first!');
-                return;
-            }
-            alert('Ready to start! Make sure Salesforce is open.');
-        }
-<div id="status" style="margin-top: 20px; padding: 10px; background: #f0f2f5; border-radius: 8px; display: none;">
-    <h3>Progress</h3>
-    <div id="currentLead"></div>
-    <div id="log"></div>
-</div>
+    </script>
 </body>
 </html>
