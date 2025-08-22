@@ -1,11 +1,14 @@
+Great ideas! Let's update the website with all these details. I'll help you create a more comprehensive guide:
+
+```html
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jeff H SF Conqueror</title>
+    <title>JHSF Conqueror</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 900px;
             margin: 20px auto;
             padding: 20px;
             background: #f0f2f5;
@@ -15,19 +18,23 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
         }
         h1 {
             color: #0070d2;
             margin-bottom: 10px;
+            font-size: 2.5em;
+            text-align: center;
         }
         .steps {
-            text-align: left;
-            max-width: 600px;
+            max-width: 800px;
             margin: 20px auto;
-            padding: 20px;
+        }
+        .step-box {
             background: #f8f9fb;
             border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #0070d2;
         }
         .copy-box {
             background: #eef1f6;
@@ -35,45 +42,159 @@
             border-radius: 6px;
             margin: 10px 0;
             font-family: monospace;
-            text-align: left;
             cursor: pointer;
+            position: relative;
         }
         .copy-box:hover {
             background: #e5e9f2;
         }
-        .highlight {
-            background: #fff7e6;
-            padding: 2px 5px;
-            border-radius: 3px;
+        .copy-box:hover:after {
+            content: 'Click to copy';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #666;
+        }
+        .button {
+            background: #0070d2;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: #005fb2;
+        }
+        .warning {
+            background: #fff4e5;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        .note {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        .tabs {
+            display: flex;
+            margin: 20px 0;
+            border-bottom: 2px solid #eef1f6;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+        .tab.active {
+            border-bottom: 2px solid #0070d2;
+            color: #0070d2;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Jeff H SF Conqueror</h1>
-        <p>Quick Guide to Automated Lead Creation</p>
+        <h1>⚡️ JHSF Conqueror</h1>
         
-        <div class="steps">
-            <h3>Quick Start:</h3>
-            <ol>
-                <li>Open Goose</li>
-                <li>Copy and paste this exact message:</li>
-                <div class="copy-box" onclick="copyText(this)">
-                    review this and pick up where we left off goose I really don't want to give up on my salesforce lead creation automation
-                </div>
-                <li>I'll immediately help you create leads!</li>
-            </ol>
-            
-            <h3>Tips:</h3>
-            <ul>
-                <li>Have your CSV ready with leads</li>
-                <li>Make sure you're logged into Salesforce</li>
-                <li>Keep your Salesforce window visible</li>
-            </ul>
-            
-            <h3>CSV Format:</h3>
-            <div class="copy-box" onclick="copyText(this)">Company Name,Address,City,State,Zip,Phone
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('quick-start')">Quick Start</div>
+            <div class="tab" onclick="showTab('new-user')">New User Setup</div>
+            <div class="tab" onclick="showTab('resources')">Resources</div>
+        </div>
+
+        <div id="quick-start" class="tab-content active">
+            <div class="step-box">
+                <h3>Quick Start for Existing Users:</h3>
+                <ol>
+                    <li>Open Goose</li>
+                    <li>Copy and paste this exact message:</li>
+                    <div class="copy-box" onclick="copyText(this)">
+                        review this and pick up where we left off goose I really don't want to give up on my salesforce lead creation automation
+                    </div>
+                </ol>
+            </div>
+        </div>
+
+        <div id="new-user" class="tab-content">
+            <div class="step-box">
+                <h3>First Time Setup:</h3>
+                <ol>
+                    <li>Enable Mac Permissions:
+                        <ul>
+                            <li>Open System Preferences</li>
+                            <li>Go to Security & Privacy > Privacy</li>
+                            <li>Enable Accessibility permissions</li>
+                            <li>Allow Chrome automation</li>
+                        </ul>
+                    </li>
+                    <li>Get Your Salesforce URL:
+                        <ul>
+                            <li>Log into Salesforce</li>
+                            <li>Go to Leads tab</li>
+                            <li>Click "New"</li>
+                            <li>Select "US Sales"</li>
+                            <li>Click "Next"</li>
+                            <li>Copy the entire URL from your browser</li>
+                        </ul>
+                        <div class="note">
+                            This URL contains your unique Salesforce ID which is needed for automation.
+                            Each user needs their own URL for the automation to work correctly.
+                        </div>
+                    </li>
+                    <li>Tell Goose you're new:
+                        <div class="copy-box" onclick="copyText(this)">
+                            JHSF Conqueror
+                        </div>
+                        <div class="note">
+                            Goose will guide you through:
+                            <ul>
+                                <li>Setting up your personal URL</li>
+                                <li>Creating your own custom command</li>
+                                <li>Testing the automation</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="resources" class="tab-content">
+            <div class="step-box">
+                <h3>CSV Template:</h3>
+                <p>Download our ready-to-use template:</p>
+                <a href="template.csv" download class="button">Download CSV Template</a>
+                
+                <h4>Example Format:</h4>
+                <div class="copy-box">Company Name,Address,City,State,Zip,Phone
 Grand Avenue Pizza,34-24 30th Avenue,Queens,NY,11103,(718) 728-8879</div>
+            </div>
+
+            <div class="step-box">
+                <h3>Important Notes:</h3>
+                <div class="warning">
+                    <strong>Required Format:</strong>
+                    <ul>
+                        <li>Phone numbers must include area code and parentheses: (XXX) XXX-XXXX</li>
+                        <li>State must be two-letter code: NY, CA, etc.</li>
+                        <li>All fields are required</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -88,6 +209,17 @@ Grand Avenue Pizza,34-24 30th Avenue,Queens,NY,11103,(718) 728-8879</div>
                 }, 500);
             });
         }
-    </script>
-</body>
-</html>
+
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Deactivate all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            // Activate selected tab
+            event
