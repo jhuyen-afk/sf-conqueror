@@ -47,6 +47,13 @@
             margin: 10px 0;
             border-radius: 6px;
         }
+        .note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
         .button {
             background: #0070d2;
             color: white;
@@ -65,7 +72,13 @@
         <div class="section">
             <h3>Quick Start:</h3>
             <ol>
-                <li>Open Goose</li>
+                <li>Open Goose:
+                    <ul>
+                        <li>Click the Block logo in your menu bar</li>
+                        <li>Select "Open Goose"</li>
+                        <li>Or use keyboard shortcut: Command (⌘) + Shift + G</li>
+                    </ul>
+                </li>
                 <li>Copy and paste this command:</li>
                 <div class="copy-box" onclick="copyText(this)">JHSF Conqueror</div>
             </ol>
@@ -73,6 +86,16 @@
 
         <div class="section">
             <h3>First Time Setup:</h3>
+            <div class="note">
+                <strong>When you first type "JHSF Conqueror", I will ask you to:</strong>
+                <ol>
+                    <li>Confirm you're a new user</li>
+                    <li>Follow steps to get your Salesforce URL</li>
+                    <li>Create your own personal command (required)</li>
+                    <li>Test the automation</li>
+                </ol>
+            </div>
+            
             <ol>
                 <li>Enable Mac Permissions:
                     <ul>
@@ -96,7 +119,11 @@
         </div>
 
         <div class="section">
-            <h3>CSV Format:</h3>
+            <h3>CSV Template:</h3>
+            <p>Download our ready-to-use template:</p>
+            <a href="salesforce_template.csv" download class="button">Download CSV Template</a>
+            
+            <h4>Example Format:</h4>
             <div class="copy-box">Company Name,Address,City,State,Zip,Phone
 Grand Avenue Pizza,34-24 30th Avenue,Queens,NY,11103,(718) 728-8879</div>
             
@@ -115,14 +142,7 @@ Grand Avenue Pizza,34-24 30th Avenue,Queens,NY,11103,(718) 728-8879</div>
         <div class="section">
             <h3>Process:</h3>
             <ol>
-                <li>Type "JHSF Conqueror" to start</li>
-                <li>Tell Goose if you're a new user</li>
-                <li>For new users:
-                    <ul>
-                        <li>Provide your Salesforce URL</li>
-                        <li>Choose your own custom command (optional)</li>
-                    </ul>
-                </li>
+                <li>Type "JHSF Conqueror" (or your personal command once set up)</li>
                 <li>Share your CSV file when prompted</li>
                 <li>Keep your Salesforce window visible</li>
                 <li>Let the automation run</li>
