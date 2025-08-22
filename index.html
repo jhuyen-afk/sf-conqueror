@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jeff H SF Conqueror - Direct Edit</title>
+    <title>Jeff H SF Conqueror</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 900px;
             margin: 20px auto;
             padding: 20px;
             background: #f0f2f5;
@@ -15,29 +15,49 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
         }
-        h1 {
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
             color: #0070d2;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #0070d2;
         }
         .button {
             background: #0070d2;
             color: white;
-            padding: 15px 30px;
+            padding: 12px 24px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 18px;
-            margin: 20px 0;
+            font-weight: bold;
+        }
+        .button:hover {
+            background: #005fb2;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Jeff H SF Conqueror</h1>
-        <h2>Direct GitHub Edit Test</h2>
-        <p>This page was edited directly on GitHub!</p>
-        <button class="button" onclick="alert('It works!')">Click Me</button>
+        <div class="header">
+            <h1>Jeff H SF Conqueror</h1>
+            <p>Let's test if this update works!</p>
+        </div>
+
+        <div class="step">
+            <h3>Simple Test</h3>
+            <p>If you see this new layout with blue accents, the update worked!</p>
+            <button class="button" onclick="alert('Update successful!')">Test Button</button>
+        </div>
     </div>
 </body>
 </html>
