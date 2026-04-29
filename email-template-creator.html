@@ -40,6 +40,11 @@
             opacity: 0.9;
         }
 
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
         .card {
             background: white;
             border-radius: 12px;
@@ -216,51 +221,20 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📧 Email Template Creator</h1>
-            <p>Generate professional onboarding email templates</p>
+            <h1>Square Email Template Creator</h1>
+            <p>Generate setup emails for Square customers</p>
         </div>
 
         <div class="card">
             <form id="templateForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="companyName">Company Name *</label>
-                        <input type="text" id="companyName" required placeholder="Enter company name">
-                    </div>
-                    <div class="form-group">
-                        <label for="contactName">Contact Name *</label>
-                        <input type="text" id="contactName" required placeholder="Enter contact name">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="gsoRep">GSO Representative *</label>
-                        <select id="gsoRep" required>
-                            <option value="">Select a representative</option>
-                            <option value="Andrea Guevara">Andrea Guevara</option>
-                            <option value="Travis Castroman">Travis Castroman</option>
-                            <option value="Sarah Johnson">Sarah Johnson</option>
-                            <option value="Mike Chen">Mike Chen</option>
-                            <option value="Emily Rodriguez">Emily Rodriguez</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="packageType">Package Type *</label>
-                        <select id="packageType" required>
-                            <option value="">Select a package</option>
-                            <option value="Plus">Plus</option>
-                            <option value="Premium">Premium</option>
-                            <option value="Onsite">Onsite</option>
-                            <option value="Payroll">Payroll</option>
-                            <option value="In-Person Refresh">In-Person Refresh</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="contactName">Contact Name *</label>
+                    <input type="text" id="contactName" required placeholder="Enter contact name">
                 </div>
 
                 <div class="form-group">
-                    <label for="bookingLink">Booking Link</label>
-                    <input type="url" id="bookingLink" placeholder="Auto-populated or enter custom link">
+                    <label for="companyName">Company Name *</label>
+                    <input type="text" id="companyName" required placeholder="Enter company name">
                 </div>
 
                 <button type="submit" class="generate-btn">Generate Email Template</button>
@@ -288,27 +262,7 @@
     </div>
 
     <script>
-        // Booking links for each rep
-        const repBookingLinks = {
-            'Andrea Guevara': 'https://calendly.com/andrea-guevara',
-            'Travis Castroman': 'https://calendly.com/travis-castroman',
-            'Sarah Johnson': 'https://calendly.com/sarah-johnson',
-            'Mike Chen': 'https://calendly.com/mike-chen',
-            'Emily Rodriguez': 'https://calendly.com/emily-rodriguez'
-        };
-
-        // Package descriptions
-        const packageDescriptions = {
-            'Plus': 'Our Plus package includes comprehensive onboarding support, access to our online portal, and dedicated customer service to help you get started quickly and efficiently.',
-            'Premium': 'Our Premium package offers enhanced features including priority support, advanced reporting tools, customized training sessions, and a dedicated account manager to ensure your success.',
-            'Onsite': 'Our Onsite package provides in-person implementation support at your location, hands-on training for your team, and personalized setup assistance to ensure seamless integration.',
-            'Payroll': 'Our Payroll package streamlines your payroll processing with automated calculations, tax compliance support, direct deposit setup, and comprehensive reporting capabilities.',
-            'In-Person Refresh': 'Our In-Person Refresh package includes an on-site visit to review your current setup, provide updated training, optimize your workflows, and address any questions or concerns.'
-        };
-
         const form = document.getElementById('templateForm');
-        const gsoRepSelect = document.getElementById('gsoRep');
-        const bookingLinkInput = document.getElementById('bookingLink');
         const outputSection = document.getElementById('outputSection');
         const subjectOutput = document.getElementById('subjectOutput');
         const bodyOutput = document.getElementById('bodyOutput');
@@ -317,48 +271,52 @@
         const notification = document.getElementById('notification');
         const notificationText = document.getElementById('notificationText');
 
-        // Auto-populate booking link when rep is selected
-        gsoRepSelect.addEventListener('change', function() {
-            const selectedRep = this.value;
-            if (selectedRep && repBookingLinks[selectedRep]) {
-                bookingLinkInput.value = repBookingLinks[selectedRep];
-            }
-        });
-
         // Generate email template
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const companyName = document.getElementById('companyName').value.trim();
             const contactName = document.getElementById('contactName').value.trim();
-            const gsoRep = gsoRepSelect.value;
-            const packageType = document.getElementById('packageType').value;
-            const bookingLink = bookingLinkInput.value.trim();
 
             // Generate subject line
-            const subject = `Welcome to ${companyName} - ${packageType} Package Onboarding`;
+            const subject = `Square: Next Steps (${companyName}) Dashboard Setup`;
 
             // Generate email body
-            const body = `Dear ${contactName},
+            const body = `Hi ${contactName},
 
-Welcome to our services! We're excited to begin working with ${companyName} and help you get the most out of your ${packageType} package.
+Thank you again for choosing Square. We truly appreciate the opportunity to work with you and are excited to support your business.
 
-${packageDescriptions[packageType]}
+To help get your account fully set up and ready to accept payments, please complete the steps below when you have a moment.
 
-To get started, I'd like to schedule an onboarding session with you. This will give us the opportunity to:
-• Review your package features and benefits
-• Set up your account and customize settings
-• Answer any questions you may have
-• Ensure you're comfortable using our platform
+First, create your new account using the same email you signed the agreement with.
+https://app.squareup.com/signup/en-US
 
-${bookingLink ? `Please use the following link to schedule a time that works best for you:\n${bookingLink}\n` : 'I will reach out shortly to schedule a convenient time for our onboarding session.\n'}
-If you have any questions before our meeting, please don't hesitate to reach out. I'm here to help make this transition as smooth as possible.
+Once signed in, please complete these items:
 
-Looking forward to working with you!
+• Verify your identity
+From the Home screen, look for the message "Try to verify your information again to accept payments" and click Start.
 
-Best regards,
-${gsoRep}
-Customer Success Team`;
+• Add your bank account for deposits
+Settings → Account & Settings → Bank Accounts
+https://app.squareup.com/dashboard/bank-accounts
+
+• Add a card on file for billing
+Use the search bar in your Dashboard, type Payment Method, and add your card.
+
+• Confirm your business information
+Please review your business name, address, phone number, hours, and time zone.
+
+Settings → Account & Settings → Business Information
+
+• Add your sales tax rates
+Items & Services → Sales Taxes
+https://app.squareup.com/dashboard/items/taxes
+
+Once completed, please reply and let me know so I can begin the next steps on my end.
+
+If any questions come up, I'm always happy to help.
+
+Very best,`;
 
             // Display the generated content
             subjectOutput.textContent = subject;
