@@ -77,12 +77,28 @@ Follow this order to efficiently fill the form using Tab navigation:
 **CRITICAL**: The Industry field is a dropdown, not a text field!
 
 ### Steps:
-1. **Tab to Industry field** until you see the dropdown with blue border (showing "--None--")
-2. **Press Enter** to open the dropdown
-3. **Use Down Arrow** (↓) to scroll through the 11 verticals
-4. **Use Up Arrow** (↑) to go backwards if you overshoot
-5. **Press Enter** to select the highlighted vertical
-6. The dropdown closes and the selected industry appears in the field
+
+#### Step 1: Navigate to Industry Dropdown
+**Tab until you reach the Industry field. You'll know you're there when:**
+- You see "View all dependencies" link with blue border/underline
+- This means you've gone **ONE field too far**
+- Press **Shift+Tab ONCE** to go back
+- Now the Industry dropdown (showing "--None--") will have the blue border ✅
+
+**Alternative**: If you land directly on the Industry dropdown with blue border, skip Shift+Tab
+
+#### Step 2: Open the Dropdown
+- Press **Enter** to open the dropdown
+- You'll see all 11 industry verticals listed
+
+#### Step 3: Navigate to Your Target Vertical
+- Use **Down Arrow** (↓) to scroll through the 11 verticals
+- Use **Up Arrow** (↑) to go backwards if you overshoot
+- The highlighted option will have a blue background
+
+#### Step 4: Select the Vertical
+- Press **Enter** to select the highlighted vertical
+- The dropdown closes and the selected industry appears in the field ✅
 
 ### Visual Cues:
 - **Blue border** = Field is focused
