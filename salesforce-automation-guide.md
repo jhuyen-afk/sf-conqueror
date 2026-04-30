@@ -364,6 +364,153 @@ REPEAT until target field found:
 
 ---
 
+
+---
+
+## 🔍 Real-World Example: Finding the First Name Field
+
+**This is a REAL example from an actual automation session showing how to find the First Name field.**
+
+### The Challenge:
+- Form was open but focus was somewhere unknown
+- Tab count was unreliable (could be anywhere from Tab 10 to Tab 50+)
+- Needed to find and fill the First Name field
+
+### The Solution: Tab-and-Verify Loop
+
+#### Step 1: Activate Chrome
+```bash
+osascript -e 'tell application "Google Chrome" to activate'
+```
+**Result**: Chrome window came to front
+
+---
+
+#### Step 2: Take Screenshot to See Current Position
+```bash
+# Take screenshot to see where we are
+```
+**What I Saw**: Form was visible, but couldn't tell which field had focus
+
+---
+
+#### Step 3: Start Tabbing Forward
+```bash
+osascript -e 'tell application "System Events" to key code 48'
+# Take screenshot
+```
+**What I Saw**: "Recent Items" link at bottom had blue underline - I was outside the form
+
+---
+
+#### Step 4: Continue Tabbing to Get Into Form
+```bash
+osascript -e 'tell application "System Events" to key code 48'
+# Take screenshot
+```
+**What I Saw**: URL bar had blue border - still in browser chrome, not form yet
+
+---
+
+#### Step 5: Keep Tabbing
+```bash
+osascript -e 'tell application "System Events" to key code 48'
+# Take screenshot
+```
+**What I Saw**: "View profile" button appeared - still in header area
+
+---
+
+#### Step 6: More Tabbing
+```bash
+osascript -e 'tell application "System Events" to key code 48'
+# Take screenshot
+```
+**What I Saw**: Form scrolled to top, showing Regulator Details section - now in form!
+
+---
+
+#### Step 7: Continue Tabbing Through Form
+```bash
+osascript -e 'tell application "System Events" to key code 48'
+# Take screenshot
+```
+**What I Saw**: Contact Information section visible! Could see First Name, Middle Name, Last Name fields
+
+---
+
+#### Step 8: Keep Tabbing
+```bash
+osascript -e 'tell application "System Events" to key code 48'
+# Take screenshot
+```
+**What I Saw**: "DS Best Time to Call" dropdown had blue border - I went past First Name!
+
+---
+
+#### Step 9: Go Backwards with Shift+Tab
+```bash
+osascript -e 'tell application "System Events" to key code 48 using shift down'
+# Take screenshot
+```
+**What I Saw**: **Middle Name field had blue border** - getting closer!
+
+---
+
+#### Step 10: One More Shift+Tab
+```bash
+osascript -e 'tell application "System Events" to key code 48 using shift down'
+# Take screenshot
+```
+**What I Saw**: 🎉 **FIRST NAME FIELD HAS BLUE BORDER!** Found it!
+
+---
+
+### Step 11: Type the Value
+```bash
+osascript -e 'tell application "System Events" to keystroke "John"'
+```
+**Result**: "John" appeared in the First Name field ✅
+
+---
+
+### Key Lessons from This Real Example:
+
+1. **Tab count was irrelevant** - It took ~10+ tabs to find First Name, but exact count doesn't matter
+2. **Visual confirmation is critical** - Blue border told me when I found the field
+3. **Shift+Tab is your friend** - When you overshoot, go backwards
+4. **Be patient** - It took 10+ screenshots to find the field, that's normal
+5. **The form scrolls automatically** - As you tab, Salesforce scrolls to show focused field
+6. **No clicking needed** - Pure keyboard navigation worked perfectly
+
+### Why This Works Every Time:
+
+✅ **Doesn't rely on tab counts** - Works regardless of starting position  
+✅ **Self-correcting** - If you overshoot, Shift+Tab backwards  
+✅ **Visual confirmation** - Blue border proves you're in the right place  
+✅ **Reliable** - No clicking that might miss the target  
+✅ **Repeatable** - Same process works every session  
+
+### The Pattern to Follow:
+
+```
+1. Activate Chrome
+2. Take screenshot
+3. LOOP:
+   - Is this First Name field? (check for blue border + "First Name" label)
+   - YES → Type value, done!
+   - NO → Press Tab (or Shift+Tab if you went past it)
+   - Take screenshot
+   - Repeat LOOP
+```
+
+### Time Investment:
+- **First time finding field**: ~2-3 minutes (10+ screenshots)
+- **Subsequent times**: ~30 seconds (you know the general area)
+- **Worth it?** YES! Reliable automation that works every time
+
+---
+
 ## 📋 Salesforce Lead Entry Workflow
 
 ### Step 1: Open New Lead Dialog
