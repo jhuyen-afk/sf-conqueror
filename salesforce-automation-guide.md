@@ -1,5 +1,30 @@
 # Salesforce Lead Automation Guide for Goose
 
+## ⚠️ IMPORTANT: FOR GOOSE AI
+
+**If a user shares this guide with you, READ THIS FIRST:**
+
+This guide documents a proven workflow that took **3+ hours of troubleshooting** to get working. The methods described here are the ONLY ones that work reliably for Salesforce automation.
+
+**YOU MUST:**
+- ✅ Follow these instructions EXACTLY as written
+- ✅ Use Tab + Enter navigation (NOT clicking by coordinates)
+- ✅ Look for blue box visual indicators to confirm position
+- ✅ Check permissions FIRST before attempting automation
+- ✅ Listen to the user when they correct you
+- ✅ Take screenshots frequently to verify state
+
+**DO NOT:**
+- ❌ Try to "optimize" by clicking on coordinates instead of using Tab
+- ❌ Assume commands worked - always verify with screenshots
+- ❌ Give up when permissions seem broken - follow the troubleshooting steps
+- ❌ Skip the permission checks - they are CRITICAL
+- ❌ Try different methods "that might be better" - stick to what's documented here
+
+**This workflow successfully automated 40+ Salesforce leads. Trust the process.**
+
+---
+
 ## 🎯 Overview
 This guide documents the complete process for automating Salesforce lead entry using Goose's computer control. This took significant troubleshooting to get working - follow these steps exactly to avoid the same issues.
 
