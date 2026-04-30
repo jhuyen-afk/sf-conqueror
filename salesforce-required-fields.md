@@ -32,6 +32,10 @@ To successfully save a new lead, you MUST fill out these fields:
 - **Industry** (dropdown) - REQUIRED (red border if empty)
   - Must select one of the 11 available verticals (see list below)
 
+### 6. Routing Information Section
+- **Lead Source** (dropdown) - REQUIRED
+  - Must select "Sales Sourced" from the 11 available options (see list below)
+
 ---
 
 ## 🏢 Complete Industry/Vertical List
@@ -54,6 +58,28 @@ When you reach the **Industry** field, press **Enter** to open the dropdown, the
 
 ---
 
+## 📞 Complete Lead Source Options
+
+When you reach the **Lead Source** field (in Routing Information section), press **Enter** to open the dropdown, then use **Up/Down arrows** to navigate and select from these options:
+
+1. **--None--** (default, not valid for saving)
+2. **Esense**
+3. **Business Partner**
+4. **Externally Sourced**
+5. **Field Created**
+6. **Internally Sourced**
+7. **Lead Partner**
+8. **Marketing Sourced**
+9. **Sales Sourced** ← **SELECT THIS ONE FOR US SALES LEADS**
+10. **Solutions Partners**
+11. **Unified Funnel**
+
+**Total**: 11 lead source options (plus "--None--" option)
+
+**For automation**: Always select **"Sales Sourced"** (option #9, 8 down arrows from "--None--")
+
+---
+
 ## 🎯 Field Fill Order (Recommended)
 
 Follow this order to efficiently fill the form using Tab navigation:
@@ -69,6 +95,7 @@ Follow this order to efficiently fill the form using Tab navigation:
 9. **Zip/Postal Code** → Tab
 10. **Country** → Tab
 11. **Industry** → Press Enter → Use Down Arrow to select vertical → Press Enter
+12. **Lead Source** → Tab (continue until Routing Information section) → Press Enter → Use Down Arrow to select "Sales Sourced" → Press Enter
 
 ---
 
@@ -191,7 +218,7 @@ After filling all required fields:
 
 ## 📊 Summary
 
-**Minimum Required Fields**: 11 fields
+**Minimum Required Fields**: 12 fields
 - First Name
 - Last Name  
 - Company
@@ -203,9 +230,13 @@ After filling all required fields:
 - Zip/Postal Code
 - Country
 - Industry (select from 11 verticals)
+- Lead Source (select "Sales Sourced")
 
 **Industry Verticals**: 11 options
 - Beauty, Casual Use, Channel, Charities/Education/Membership, Fitness, Food and Drink, Health, Home and Repair, IT and Services, Leisure and Entertainment
+
+**Lead Source Options**: 11 options
+- Esense, Business Partner, Externally Sourced, Field Created, Internally Sourced, Lead Partner, Marketing Sourced, **Sales Sourced** (required), Solutions Partners, Unified Funnel
 
 **Key Strategy**: Tab-and-Verify loop with visual confirmation (blue borders)
 
