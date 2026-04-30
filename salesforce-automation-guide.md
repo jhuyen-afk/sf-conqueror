@@ -539,11 +539,47 @@ osascript -e 'tell application "System Events" to keystroke "John"'
 ```
 
 ### Step 4: Save Lead
+
+**CRITICAL**: Two scenarios can happen when saving:
+
+#### Scenario A: Successful Save (No Duplicates)
 ```
-1. Tab to "Save" button (blue box indicator)
+1. Tab forward until "Save" button has blue box indicator
 2. Press Enter
-3. Lead is created
+3. Lead is created successfully
+4. Form closes and returns to Leads list
 ```
+
+#### Scenario B: Duplicate Detection Popup ⚠️
+
+**If a duplicate lead exists, a POPUP will appear and PREVENT you from saving.**
+
+**What Happens:**
+- Modal dialog appears over the form
+- Message: "Potential Duplicate Detected" or similar
+- Shows existing lead(s) that match (by Company name, Phone, etc.)
+- Buttons available: "Cancel", "Save Anyway", or "Merge"
+
+**How to Handle:**
+1. **Take screenshot** to see the duplicate popup
+2. **Read the message** to understand what matched
+3. **Navigate with Tab** to the appropriate button:
+   - **Cancel** - Abort save, close popup, return to form (RECOMMENDED)
+   - **Save Anyway** - Create duplicate lead despite warning
+   - **Merge** - Merge with existing lead (if available)
+4. **Press Enter** to select your choice
+
+**Recommended Action:**
+- Press Tab until "Cancel" button has blue border
+- Press Enter to cancel
+- Notify user: "Duplicate detected for [Company Name]. Lead not created."
+- Log the duplicate in your report
+
+**Visual Cues:**
+- Popup appears as overlay on top of form
+- Popup has its own Tab navigation (separate from form)
+- Blue border indicates focused button in popup
+- Background form is dimmed/disabled
 
 ---
 

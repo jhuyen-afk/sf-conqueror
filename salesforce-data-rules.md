@@ -243,6 +243,88 @@ Summary:
 
 ---
 
+## 🔄 Duplicate Detection Handling
+
+### When Saving a Lead:
+
+**Salesforce will detect duplicates** based on:
+- Company name
+- Phone number
+- Email address
+- Other matching criteria
+
+**If a duplicate is detected:**
+1. **A popup appears** over the form
+2. **Message**: "Potential Duplicate Detected" or similar
+3. **Shows existing lead(s)** that match
+4. **Prevents automatic save** - requires user decision
+
+### How to Handle Duplicates in Automation:
+
+#### Step 1: Detect the Popup
+- After pressing Enter on Save button
+- Take screenshot to check for popup
+- Look for modal dialog overlay
+
+#### Step 2: Read the Popup
+- Identify which field(s) matched (Company, Phone, etc.)
+- Note the existing lead details shown
+
+#### Step 3: Make a Decision
+**Three options available:**
+
+1. **Cancel** (RECOMMENDED for automation)
+   - Tab to "Cancel" button
+   - Press Enter
+   - Returns to form without saving
+   - Log: "Row X: DUPLICATE - Company '[Name]' already exists"
+
+2. **Save Anyway**
+   - Tab to "Save Anyway" button
+   - Press Enter
+   - Creates duplicate lead despite warning
+   - Use only if instructed by user
+
+3. **Merge**
+   - Tab to "Merge" button (if available)
+   - Press Enter
+   - Merges new data with existing lead
+   - More complex workflow
+
+#### Step 4: Log the Duplicate
+```
+Row 15: DUPLICATE DETECTED - Company 'Acme Corp' already exists (Lead ID: 00Q...)
+Action: Cancelled save, skipped row
+```
+
+### Automation Strategy for Duplicates:
+
+**Conservative Approach (Recommended):**
+- Always choose "Cancel" when duplicate detected
+- Log the duplicate with row number and company name
+- Continue to next lead in CSV
+- Report all duplicates at the end
+
+**Aggressive Approach (Use with caution):**
+- Choose "Save Anyway" to create duplicates
+- Useful if intentional (e.g., multiple contacts at same company)
+- Must be explicitly requested by user
+
+### Example Duplicate Log:
+```
+Duplicate Detection Summary:
+- Row 8: Acme Corp (Phone: 555-1234) - CANCELLED
+- Row 23: Beta LLC (Email: contact@beta.com) - CANCELLED  
+- Row 41: Gamma Inc (Company name match) - CANCELLED
+
+Total duplicates detected: 3
+Total leads created: 47
+Total failed (missing data): 0
+Total skipped (duplicates): 3
+```
+
+---
+
 ## 💡 Best Practices
 
 1. **Validate CSV before starting** - Check for required fields
