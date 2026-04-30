@@ -285,6 +285,77 @@ hotkey --keys shift,tab
 
 ---
 
+
+## 📊 Field Mapping Reference
+
+**CRITICAL: A complete field mapping document (`salesforce-field-mapping.md`) has been created that maps all 97 fields in the US Sales lead form.**
+
+### Why This Matters:
+
+The field mapping was created through a **one-time discovery process** where every field in the form was systematically documented. This means:
+
+✅ **Future automation is FAST** - No need to explore the form again  
+✅ **Field recognition over tab counting** - Know fields by their labels, not position  
+✅ **Complete documentation** - All 9 sections and 97 fields mapped  
+✅ **Required fields identified** - Know exactly what must be filled  
+
+### Using the Field Mapping:
+
+When filling out leads, refer to `salesforce-field-mapping.md` to:
+1. **Identify which fields exist** in each section
+2. **Recognize fields by their labels** (not tab counts)
+3. **Know which fields are required** vs optional
+4. **Understand field types** (text, dropdown, checkbox, etc.)
+
+### The 9 Form Sections:
+
+1. **Regulator Details** - Merchant Token
+2. **Opportunity Description** - Current Situation, Business Type, Timeline, etc.
+3. **Contact Information** - Name, Company (required), Phone, Email, Address
+4. **Business Information** - Industry (required), Revenue, POS, Processor
+5. **Lead Status** - Lead Status, Drip Date, Rating
+6. **Next Steps** - Next Steps text, Next Step Date
+7. **Social Media** - Facebook, Twitter, Instagram, LinkedIn, etc.
+8. **Routing Information** - Lead Source, Source Detail, Email Opt Out
+9. **System Information** - Lead Type (defaults to "Sales")
+
+### Required Fields (Minimum to Save):
+
+1. **Last Name** (Contact Information)
+2. **Company** (Contact Information)
+3. **Industry** (Business Information)
+4. **Lead Currency** (Business Information) - defaults to USD
+5. **Lead Status** (Lead Status) - defaults to Open
+6. **Lead Type** (System Information) - defaults to Sales
+
+### Field Recognition Tips:
+
+**Don't count tabs!** Instead, recognize fields by:
+- **Section headers** - Bold, larger text (e.g., "Contact Information")
+- **Field labels** - Text above or beside input fields
+- **Required indicators** - Red asterisk (*) and red borders when empty
+- **Visual cues** - Blue border = focused, Red border = required & empty
+- **Field types** - Dropdowns show arrows, text areas are taller, checkboxes are squares
+
+### Why Tab Counts Change:
+
+Tab order can vary based on:
+- Which fields are visible/hidden
+- Field dependencies (e.g., Sub-Industry depends on Industry)
+- What's already filled in
+- Browser state and focus
+
+**The solution**: Recognize fields by their labels and visual appearance, not by counting tabs from the start.
+
+### Time Savings:
+
+- **Initial mapping**: 30+ minutes (one-time discovery)
+- **Future lead entry**: 2-3 minutes per lead (using the mapping)
+
+**The mapping document makes all future automation fast and reliable.**
+
+---
+
 ## 🐛 Troubleshooting
 
 ### Problem: "Typing doesn't work - text doesn't appear"
