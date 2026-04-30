@@ -32,6 +32,28 @@ This guide documents the complete process for automating Salesforce lead entry u
 
 ## ✅ Prerequisites & Setup
 
+### 0. **Physical Setup (DO THIS FIRST)**
+
+Before starting any automation, prepare your workspace:
+
+**REQUIRED:**
+- [ ] **Disconnect all external monitors** - Use ONLY your laptop screen
+- [ ] **Disconnect external keyboards** - Use ONLY your laptop keyboard
+- [ ] **Disconnect external mice/trackpads** - Use ONLY your laptop trackpad
+- [ ] **Close all unnecessary applications** - Only keep Chrome (Salesforce) and Goose open
+- [ ] **Make Chrome window large** - Maximize or make it fill most of the screen
+- [ ] **Position Goose window to the side** - So you can see both Goose and Chrome
+
+**Why this matters:**
+- External monitors cause window detection issues
+- External input devices can interfere with automation
+- Multiple screens make it harder to target the correct window
+- A clean workspace reduces errors and confusion
+
+**Once automation is working reliably, you can experiment with adding external devices back. But for initial setup and troubleshooting, keep it simple.**
+
+---
+
 ### 1. **macOS Permissions (CRITICAL)**
 Both permissions are **required** for keyboard/mouse automation to work:
 
