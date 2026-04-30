@@ -251,6 +251,121 @@ hotkey --keys shift,tab
 
 ## 📋 Salesforce Lead Entry Workflow
 
+## 🎯 Field Navigation Strategy (CRITICAL)
+
+**THE GOLDEN RULE: Find fields by their LABELS, not by tab counts!**
+
+### Why This Matters:
+
+Tab counts **WILL CHANGE** between sessions because:
+- Fields get hidden/shown based on what's filled
+- Browser state varies
+- Salesforce updates change the form
+- Focus position when form opens isn't always the same
+
+### The Correct Approach:
+
+**❌ WRONG: "Press Tab 15 times to get to First Name"**
+- Tab count changes = you end up on wrong field
+- Automation breaks every time
+
+**✅ CORRECT: "Find First Name field, then fill it"**
+- Works regardless of tab count
+- Reliable across sessions
+- Self-correcting
+
+### How to Navigate to a Specific Field:
+
+```
+STRATEGY: Tab + Screenshot + Verify + Repeat until found
+
+1. Take screenshot to see current field
+2. Check field label - is this the field we want?
+   - YES → Type the value, move to next field
+   - NO → Press Tab, take another screenshot, repeat
+
+3. Keep tabbing until you see the target field label
+4. Visual confirmation: blue border around the field
+5. Type the value
+6. Move to next field in your list
+```
+
+### Example: Finding "First Name" Field
+
+```bash
+# Start: Form just opened, we're somewhere in the form
+
+# Step 1: Where are we?
+osascript -e 'tell application "Google Chrome" to activate'
+# Take screenshot - see we're on "Merchant Token" field
+
+# Step 2: Not First Name yet, keep tabbing
+osascript -e 'tell application "System Events" to key code 48'
+# Take screenshot - see we're on "Current Situation" field
+
+# Step 3: Still not First Name, keep tabbing
+osascript -e 'tell application "System Events" to key code 48'
+# Take screenshot - see we're on "Need/Pain/Interest" field
+
+# Keep repeating until...
+
+# Step N: Found it!
+# Take screenshot - see "First Name" label with blue border
+osascript -e 'tell application "System Events" to keystroke "John"'
+# Success! Now move to next field (Last Name)
+```
+
+### Field Order for Automation:
+
+**Fill fields in this order** (matches form layout top-to-bottom):
+
+1. **First Name** - Tab until you see "First Name" label
+2. **Last Name** - Tab once from First Name (they're adjacent)
+3. **Company** - Tab until you see "Company" label (required field)
+4. **Email** - Tab until you see "Email" label
+5. **Phone** - Tab until you see "Phone" label
+6. **Industry** - Tab until you see "Industry" label (required field)
+7. (Continue for other fields as needed)
+
+### Visual Indicators to Look For:
+
+- **Field label text** - "First Name", "Last Name", "Company", etc.
+- **Blue border** - Shows which field is currently focused
+- **Red border** - Shows required field that's empty
+- **Section headers** - "Contact Information", "Business Information", etc.
+
+### The Tab-and-Verify Loop:
+
+```
+REPEAT until target field found:
+  1. Take screenshot
+  2. Read field label
+  3. Is this the target field?
+     YES → Type value, move to next target
+     NO  → Press Tab, go to step 1
+```
+
+### Why This Works:
+
+✅ **Resilient** - Doesn't break when tab counts change  
+✅ **Self-correcting** - Finds the field no matter where you start  
+✅ **Visual confirmation** - Always know where you are  
+✅ **No clicking** - Uses reliable Tab navigation  
+✅ **Repeatable** - Works the same way every time  
+
+### Important Notes:
+
+- **Don't count tabs from the beginning** - Start wherever you are, find the field
+- **Take screenshots frequently** - Visual confirmation is key
+- **Read field labels** - That's how you know you're in the right place
+- **Be patient** - It might take 5-10 tabs to find a field, that's OK
+- **Trust the process** - This method is proven to work
+- **NO CLICKING** - Tab navigation only, clicking doesn't work
+
+---
+
+## 📋 Salesforce Lead Entry Workflow
+
 ### Step 1: Open New Lead Dialog
 ```
 1. Start on Leads list page
