@@ -201,6 +201,25 @@
             z-index: 1000;
         }
 
+        .input-with-prefix {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-prefix {
+            position: absolute;
+            left: 1rem;
+            color: #4A4A4A;
+            font-size: 1.1rem;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .input-with-prefix input[type="number"] {
+            padding-left: 2rem;
+        }
+
         input[type="number"] {
             width: 100%;
             padding: 1rem;
@@ -320,12 +339,15 @@
 
         .estimated-savings {
             margin-top: 1.5rem;
+            margin-left: 0;
+            margin-right: 0;
             background-color: #F8F9FB;
             padding: 1.25rem;
             border-radius: 12px;
             border: 2px solid #006AFF;
             box-sizing: border-box;
-            width: 100%;
+            width: calc(100% - 0px);
+            max-width: 100%;
             overflow: hidden;
         }
 
