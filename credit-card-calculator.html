@@ -339,15 +339,14 @@
 
         .estimated-savings {
             margin-top: 1.5rem;
-            margin-left: 0;
-            margin-right: 0;
+            margin-left: -2rem;
+            margin-right: -2rem;
             background-color: #F8F9FB;
-            padding: 1.25rem;
+            padding: 1.25rem 3.25rem;
             border-radius: 12px;
             border: 2px solid #006AFF;
             box-sizing: border-box;
-            width: calc(100% - 0px);
-            max-width: 100%;
+            width: calc(100% + 4rem);
             overflow: hidden;
         }
 
@@ -526,37 +525,47 @@
             <div id="effectiveRateInputs" class="calculator-inputs">
                 <div class="input-group">
                     <label for="monthlySales">Total Sales ($) <span class="tooltip-icon" data-tooltip="Your total monthly sales volume">?</span></label>
-                    <input type="number" id="monthlySales" placeholder="Enter amount" min="0" step="0.01">
+                    <div class="input-with-prefix">
+                        <span class="input-prefix">$</span>
+                        <input type="number" id="monthlySales" placeholder="0.00" min="0" step="0.01">
+                    </div>
                 </div>
                 <div class="input-group transaction-input hidden">
                     <label for="monthlyTransactions">Number of Transactions <span class="tooltip-icon" data-tooltip="Total number of transactions per month">?</span></label>
-                    <input type="number" id="monthlyTransactions" placeholder="Enter number" min="0" step="1">
+                    <input type="number" id="monthlyTransactions" placeholder="0" min="0" step="1">
                 </div>
                 <div class="input-group">
                     <label for="processingFeeAmount">Total Processing Fee ($) <span class="tooltip-icon" data-tooltip="What you currently pay in processing fees">?</span></label>
-                    <input type="number" id="processingFeeAmount" placeholder="Enter fee" min="0" step="0.01">
+                    <div class="input-with-prefix">
+                        <span class="input-prefix">$</span>
+                        <input type="number" id="processingFeeAmount" placeholder="0.00" min="0" step="0.01">
+                    </div>
                 </div>
             </div>
 
             <!-- Total Fee Calculator -->
             <div id="totalFeeInputs" class="calculator-inputs hidden">
                 <div class="input-group">
-                    <label for="totalSales">Total Sales ($)</label>
-                    <input type="number" id="totalSales" placeholder="Enter amount" min="0" step="0.01">
+                    <label for="totalSales">Total Sales ($) <span class="tooltip-icon" data-tooltip="Your total monthly sales volume">?</span></label>
+                    <div class="input-with-prefix">
+                        <span class="input-prefix">$</span>
+                        <input type="number" id="totalSales" placeholder="0.00" min="0" step="0.01">
+                    </div>
                 </div>
                 <div class="input-group transaction-input hidden">
-                    <label for="totalTransactions">Number of Transactions</label>
-                    <input type="number" id="totalTransactions" placeholder="Enter number" min="0" step="1">
+                    <label for="totalTransactions">Number of Transactions <span class="tooltip-icon" data-tooltip="Total number of transactions per month">?</span></label>
+                    <input type="number" id="totalTransactions" placeholder="0" min="0" step="1">
                 </div>
                 <div class="input-group">
-                    <label for="feePercentage">Percentage Fee (%)</label>
-                    <input type="number" id="feePercentage" placeholder="Enter percentage" min="0" step="0.01">
-                    <p class="input-help">Example: For 2.9%, enter 2.9</p>
+                    <label for="feePercentage">Percentage Fee (%) <span class="tooltip-icon" data-tooltip="Your current processor's percentage rate (e.g., 2.9%)">?</span></label>
+                    <input type="number" id="feePercentage" placeholder="0.00" min="0" step="0.01">
                 </div>
                 <div class="input-group transaction-input hidden">
-                    <label for="perTransactionFee">Per Transaction Fee ($)</label>
-                    <input type="number" id="perTransactionFee" placeholder="Enter fee" min="0" step="0.01">
-                    <p class="input-help">Example: For $0.30, enter 0.30</p>
+                    <label for="perTransactionFee">Per Transaction Fee ($) <span class="tooltip-icon" data-tooltip="Fixed fee per transaction (e.g., $0.30)">?</span></label>
+                    <div class="input-with-prefix">
+                        <span class="input-prefix">$</span>
+                        <input type="number" id="perTransactionFee" placeholder="0.00" min="0" step="0.01">
+                    </div>
                 </div>
             </div>
 
@@ -598,6 +607,7 @@
                         <span class="result-value" id="effectiveEstimatedSavings">$0.00</span>
                     </div>
                 </div>
+                <button class="copy-button" id="copyEffectiveResults" onclick="copyEffectiveResults()">📋 Copy Results to Clipboard</button>
 
                 <div id="totalFeeResults" class="hidden">
                     <div class="result-item">
@@ -629,6 +639,7 @@
                         <span class="result-value" id="totalEstimatedSavings">$0.00</span>
                     </div>
                 </div>
+                <button class="copy-button" id="copyTotalResults" onclick="copyTotalResults()">📋 Copy Results to Clipboard</button>
             </div>
         </div>
     </div>
@@ -1083,6 +1094,68 @@ document.addEventListener('DOMContentLoaded', function() {
 
         saasResults.style.display = 'block';
     });
+
+    // Copy Effective Rate Results to Clipboard
+    function copyEffectiveResults() {
+        const currentRate = document.getElementById('effectiveCurrentFee').textContent;
+        const newRate = document.getElementById('effectiveNewFee').textContent;
+        const savings = document.getElementById('effectiveEstimatedSavings').textContent;
+        
+        const copyText = `
+Square Processing Fee Analysis
+
+Current Rate: ${currentRate}
+New Rate with Square: ${newRate}
+Monthly Processing Fee Savings: ${savings}
+
+Annual Savings: $${(parseFloat(savings.replace('$', '').replace(',', '')) * 12).toFixed(2)}
+        `.trim();
+        
+        navigator.clipboard.writeText(copyText).then(function() {
+            const btn = document.getElementById('copyEffectiveResults');
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Copied to Clipboard!';
+            btn.style.backgroundColor = '#28a745';
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.style.backgroundColor = '#006AFF';
+            }, 2000);
+        }).catch(function(err) {
+            alert('Failed to copy: ' + err);
+        });
+    }
+
+    // Copy Total Fee Results to Clipboard
+    function copyTotalResults() {
+        const currentFee = document.getElementById('totalCurrentFee').textContent;
+        const newFee = document.getElementById('totalNewFee').textContent;
+        const savings = document.getElementById('totalEstimatedSavings').textContent;
+        
+        const copyText = `
+Square Processing Fee Analysis
+
+Current Processing Fee: ${currentFee}
+New Fee with Square: ${newFee}
+Monthly Processing Fee Savings: ${savings}
+
+Annual Savings: $${(parseFloat(savings.replace('$', '').replace(',', '')) * 12).toFixed(2)}
+        `.trim();
+        
+        navigator.clipboard.writeText(copyText).then(function() {
+            const btn = document.getElementById('copyTotalResults');
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Copied to Clipboard!';
+            btn.style.backgroundColor = '#28a745';
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.style.backgroundColor = '#006AFF';
+            }, 2000);
+        }).catch(function(err) {
+            alert('Failed to copy: ' + err);
+        });
+    }
 
     // Copy Results to Clipboard
     const copyResultsBtn = document.getElementById('copyResultsBtn');
