@@ -884,7 +884,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Calculate yearly savings
-        const saasFeeYearly = (currentSaasFee - squareFee) * 12; // Difference between current and Square
+        const saasFeeYearly = (currentSaasFee * 12) - (squareFee * 12); // Current annual cost - Square annual cost
         const processingYearly = processingSavings * 12;
         const totalYearly = saasFeeYearly + processingYearly;
 
