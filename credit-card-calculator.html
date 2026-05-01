@@ -824,7 +824,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <label for="squareSaasFee">Square SaaS Fee</label>
             <div class="input-with-prefix">
                 <span class="input-prefix">$</span>
-                <input type="number" id="squareSaasFee" value="0.00" step="0.01" min="0" readonly style="background-color: #f8f9fa;">
+                <input type="number" id="squareSaasFee" placeholder="0.00" step="0.01" min="0">
             </div>
         </div>
 
@@ -866,6 +866,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const calculateSaasBtn = document.getElementById('calculateSaasBtn');
     const saasResults = document.getElementById('saasResults');
     const saasMonthlyFee = document.getElementById('saasMonthlyFee');
+    const squareSaasFee = document.getElementById('squareSaasFee');
     const monthlyProcessingSavings = document.getElementById('monthlyProcessingSavings');
     const saasFeeYearlySavings = document.getElementById('saasFeeYearlySavings');
     const processingYearlySavings = document.getElementById('processingYearlySavings');
@@ -873,6 +874,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calculateSaasBtn.addEventListener('click', function() {
         const currentSaasFee = parseFloat(saasMonthlyFee.value) || 0;
+        const squareFee = parseFloat(squareSaasFee.value) || 0;
         const processingSavings = parseFloat(monthlyProcessingSavings.value) || 0;
 
         // Validate inputs
@@ -882,7 +884,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Calculate yearly savings
-        const saasFeeYearly = currentSaasFee * 12; // Square has $0 SaaS fee
+        const saasFeeYearly = (currentSaasFee - squareFee) * 12; // Difference between current and Square
         const processingYearly = processingSavings * 12;
         const totalYearly = saasFeeYearly + processingYearly;
 
