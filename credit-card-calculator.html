@@ -806,5 +806,120 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
     </script>
+
+    <!-- SaaS Cost Savings Calculator Section -->
+    <div class="calculator-section" style="margin-top: 60px;">
+        <h2 style="text-align: center; color: #000000; margin-bottom: 10px;">SaaS Cost Savings Calculator</h2>
+        <p style="text-align: center; color: #6c757d; margin-bottom: 30px;">Calculate your savings by switching from SaaS to Square</p>
+        
+        <div class="input-group">
+            <label for="saasMonthlyFee">Current SaaS Monthly Fee</label>
+            <div class="input-with-prefix">
+                <span class="input-prefix">$</span>
+                <input type="number" id="saasMonthlyFee" placeholder="0.00" step="0.01" min="0">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="saasProcessingRate">SaaS Processing Rate (%)</label>
+            <div class="input-with-prefix">
+                <input type="number" id="saasProcessingRate" placeholder="0.00" step="0.01" min="0" max="100">
+                <span class="input-suffix">%</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="saasMonthlySales">Monthly Sales Volume</label>
+            <div class="input-with-prefix">
+                <span class="input-prefix">$</span>
+                <input type="number" id="saasMonthlySales" placeholder="0.00" step="0.01" min="0">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="squareProcessingRate">Square Processing Rate (%)</label>
+            <div class="input-with-prefix">
+                <input type="number" id="squareProcessingRate" placeholder="2.90" step="0.01" min="0" max="100" value="2.90">
+                <span class="input-suffix">%</span>
+            </div>
+        </div>
+
+        <button class="calculate-btn" id="calculateSaasBtn">Calculate Savings</button>
+
+        <div class="results-section" id="saasResults" style="display: none;">
+            <h3>Results</h3>
+            
+            <div class="result-item">
+                <span class="result-label">Current SaaS Total Cost:</span>
+                <span class="result-value" id="saasCurrentTotal">$0.00</span>
+            </div>
+
+            <div class="result-item">
+                <span class="result-label">Square Total Cost:</span>
+                <span class="result-value" id="squareTotal">$0.00</span>
+            </div>
+
+            <div class="result-item highlight">
+                <span class="result-label">Monthly Savings:</span>
+                <span class="result-value" id="saasMonthlySavings">$0.00</span>
+            </div>
+
+            <div class="result-item highlight">
+                <span class="result-label">Yearly Savings:</span>
+                <span class="result-value" id="saasYearlySavings" style="font-size: 1.3em; font-weight: bold;">$0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // SaaS Calculator Logic
+    const calculateSaasBtn = document.getElementById('calculateSaasBtn');
+    const saasResults = document.getElementById('saasResults');
+    const saasMonthlyFee = document.getElementById('saasMonthlyFee');
+    const saasProcessingRate = document.getElementById('saasProcessingRate');
+    const saasMonthlySales = document.getElementById('saasMonthlySales');
+    const squareProcessingRate = document.getElementById('squareProcessingRate');
+    const saasCurrentTotal = document.getElementById('saasCurrentTotal');
+    const squareTotal = document.getElementById('squareTotal');
+    const saasMonthlySavings = document.getElementById('saasMonthlySavings');
+    const saasYearlySavings = document.getElementById('saasYearlySavings');
+
+    calculateSaasBtn.addEventListener('click', function() {
+        const monthlyFee = parseFloat(saasMonthlyFee.value) || 0;
+        const saasRate = parseFloat(saasProcessingRate.value) || 0;
+        const sales = parseFloat(saasMonthlySales.value) || 0;
+        const squareRate = parseFloat(squareProcessingRate.value) || 2.90;
+
+        // Validate inputs
+        if (sales <= 0) {
+            alert('Please enter a valid monthly sales volume');
+            return;
+        }
+
+        // Calculate SaaS total cost
+        const saasProcessingFee = sales * (saasRate / 100);
+        const saasTotalCost = monthlyFee + saasProcessingFee;
+
+        // Calculate Square total cost (no monthly fee)
+        const squareProcessingFee = sales * (squareRate / 100);
+        const squareTotalCost = squareProcessingFee;
+
+        // Calculate savings
+        const monthlySavings = saasTotalCost - squareTotalCost;
+        const yearlySavings = monthlySavings * 12;
+
+        // Display results
+        saasCurrentTotal.textContent = formatCurrency(saasTotalCost);
+        squareTotal.textContent = formatCurrency(squareTotalCost);
+        saasMonthlySavings.textContent = formatCurrency(monthlySavings);
+        saasYearlySavings.textContent = formatCurrency(yearlySavings);
+
+        // Color code savings
+        saasMonthlySavings.style.color = monthlySavings > 0 ? '#006AFF' : '#DC3545';
+        saasYearlySavings.style.color = yearlySavings > 0 ? '#006AFF' : '#DC3545';
+
+        saasResults.style.display = 'block';
+    });
+    </script>
 </body>
 </html>
