@@ -1,0 +1,91 @@
+<svg width="1024" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Two people silhouettes -->
+  <ellipse cx="30" cy="25" rx="12" ry="15" fill="black"/>
+  <ellipse cx="50" cy="25" rx="12" ry="15" fill="black"/>
+  <path d="M 20 40 Q 30 35 40 40 L 40 70 L 20 70 Z" fill="black"/>
+  <path d="M 40 40 Q 50 35 60 40 L 60 70 L 40 70 Z" fill="black"/>
+  
+  <!-- Bitcoin symbol -->
+  <circle cx="130" cy="40" r="30" stroke="black" stroke-width="3" fill="none"/>
+  <circle cx="130" cy="40" r="30" stroke="black" stroke-width="1" fill="none" stroke-dasharray="5,5"/>
+  <text x="120" y="55" font-family="Arial Black" font-size="40" font-weight="bold" fill="black">B</text>
+  <line x1="135" y1="15" x2="135" y2="65" stroke="black" stroke-width="3"/>
+  <line x1="125" y1="15" x2="125" y2="65" stroke="black" stroke-width="3"/>
+  
+  <!-- THANK YOU text -->
+  <text x="220" y="30" font-family="Arial" font-size="24" font-weight="bold" fill="black">THANK YOU</text>
+  <text x="220" y="55" font-family="Arial" font-size="24" font-weight="bold" fill="black">THANK YOU</text>
+  
+  <!-- Decorative swirls -->
+  <path d="M 450 20 Q 460 10 470 20 Q 480 30 470 40 Q 460 50 450 40" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 480 25 Q 490 15 500 25 Q 510 35 500 45" stroke="black" stroke-width="2" fill="none"/>
+  
+  <!-- Shopping basket -->
+  <rect x="600" y="40" width="50" height="35" fill="none" stroke="black" stroke-width="2"/>
+  <line x1="605" y1="40" x2="600" y2="30" stroke="black" stroke-width="2"/>
+  <line x1="645" y1="40" x2="650" y2="30" stroke="black" stroke-width="2"/>
+  <line x1="610" y1="50" x2="640" y2="50" stroke="black" stroke-width="1"/>
+  <line x1="610" y1="60" x2="640" y2="60" stroke="black" stroke-width="1"/>
+  
+  <!-- Receipt/Paper -->
+  <rect x="730" y="20" width="60" height="50" fill="white" stroke="black" stroke-width="2"/>
+  <line x1="740" y1="30" x2="780" y2="30" stroke="black" stroke-width="1"/>
+  <line x1="740" y1="40" x2="780" y2="40" stroke="black" stroke-width="1"/>
+  <line x1="740" y1="50" x2="780" y2="50" stroke="black" stroke-width="1"/>
+  <line x1="740" y1="60" x2="760" y2="60" stroke="black" stroke-width="1"/>
+  
+  <!-- Coffee cup -->
+  <ellipse cx="920" cy="35" rx="35" ry="40" fill="white" stroke="black" stroke-width="3"/>
+  <ellipse cx="920" cy="30" rx="30" ry="10" fill="white" stroke="black" stroke-width="2"/>
+  <path d="M 955 40 Q 970 40 970 50 Q 970 60 955 60" stroke="black" stroke-width="3" fill="none"/>
+  <path d="M 900 25 Q 905 15 910 25" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 920 25 Q 925 15 930 25" stroke="black" stroke-width="2" fill="none"/>
+  
+  <!-- OPEN sign (bottom left) -->
+  <rect x="80" y="120" width="70" height="50" fill="white" stroke="black" stroke-width="3"/>
+  <line x1="85" y1="125" x2="145" y2="125" stroke="black" stroke-width="2"/>
+  <line x1="85" y1="165" x2="145" y2="165" stroke="black" stroke-width="2"/>
+  <text x="95" y="152" font-family="Arial Black" font-size="20" font-weight="bold" fill="black">OPEN</text>
+  
+  <!-- Smiley bag -->
+  <path d="M 250 120 Q 240 130 240 145 L 240 170 L 300 170 L 300 145 Q 300 130 290 120 Z" fill="black"/>
+  <circle cx="260" cy="145" r="4" fill="white"/>
+  <circle cx="280" cy="145" r="4" fill="white"/>
+  <path d="M 255 155 Q 270 165 285 155" stroke="white" stroke-width="3" fill="none"/>
+  <rect x="265" y="115" width="10" height="10" fill="black"/>
+  
+  <!-- "See you in the neighborhood" text -->
+  <text x="380" y="145" font-family="Georgia, serif" font-size="22" font-style="italic" fill="black">See you in the</text>
+  <text x="380" y="170" font-family="Georgia, serif" font-size="22" font-style="italic" fill="black">neighborhood</text>
+  
+  <!-- Plant -->
+  <line x1="40" y1="170" x2="40" y2="140" stroke="black" stroke-width="2"/>
+  <path d="M 40 150 Q 30 145 25 155" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 40 150 Q 50 145 55 155" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 40 160 Q 32 158 28 165" stroke="black" stroke-width="2" fill="none"/>
+  <ellipse cx="40" cy="172" rx="8" ry="4" fill="black"/>
+  
+  <!-- Price tags -->
+  <text x="650" y="145" font-family="Arial" font-size="18" fill="black">15.¢ 15.90</text>
+  <text x="650" y="165" font-family="Arial" font-size="18" fill="black">15.90 15.¢</text>
+  
+  <!-- Mountain/Triangle -->
+  <path d="M 180 170 L 210 130 L 240 170 Z" fill="none" stroke="black" stroke-width="2"/>
+  <path d="M 195 155 L 210 140 L 225 155" stroke="black" stroke-width="1"/>
+  
+  <!-- Pixel cursor -->
+  <path d="M 350 125 L 350 155 L 360 145 L 370 160 L 375 157 L 365 142 L 375 142 Z" fill="black"/>
+  
+  <!-- Wavy cat -->
+  <path d="M 450 160 Q 460 150 470 160 Q 480 170 490 160 Q 500 150 510 160" stroke="black" stroke-width="3" fill="none"/>
+  <circle cx="465" cy="155" r="2" fill="black"/>
+  <circle cx="485" cy="155" r="2" fill="black"/>
+  
+  <!-- Flower/Plant decoration -->
+  <circle cx="780" cy="140" r="8" fill="white" stroke="black" stroke-width="2"/>
+  <circle cx="770" cy="150" r="8" fill="white" stroke="black" stroke-width="2"/>
+  <circle cx="790" cy="150" r="8" fill="white" stroke="black" stroke-width="2"/>
+  <circle cx="780" cy="160" r="8" fill="white" stroke="black" stroke-width="2"/>
+  <circle cx="780" cy="150" r="5" fill="black"/>
+  <line x1="780" y1="160" x2="780" y2="175" stroke="black" stroke-width="2"/>
+</svg>
