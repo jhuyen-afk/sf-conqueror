@@ -284,6 +284,35 @@
             margin: 2rem 0 1.5rem 0;
         }
 
+        .copy-button {
+            width: 100%;
+            padding: 0.875rem;
+            background-color: #f8f9fa;
+            color: #495057;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .copy-button:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .copy-button:active {
+            transform: translateY(0);
+        }
+
         .calculate-btn:hover {
             background-color: #0055CC;
             transform: translateY(-1px);
@@ -493,11 +522,19 @@
                 📘 How to Use This Calculator <span id="howToUseToggle" style="float: right;">▼</span>
             </h3>
             <ol id="howToUseContent" style="display: none; margin: 1rem 0 0 0; padding-left: 1.5rem; color: #4A4A4A; line-height: 1.8;">
-                <li><strong>Step 1:</strong> Choose between "Effective Rate" or "Total Fee" calculator</li>
-                <li><strong>Step 2:</strong> Enter your current processing details (sales, rates, fees)</li>
-                <li><strong>Step 3:</strong> Enter Square's processing details for comparison</li>
-                <li><strong>Step 4:</strong> Click "Calculate" to see your potential savings</li>
-                <li><strong>Step 5:</strong> Scroll down to the "Yearly Savings Calculator" to see annual savings including platform fees</li>
+                <li><strong>Step 1:</strong> Choose your calculator type:
+                    <ul style="margin-top: 0.5rem;">
+                        <li><strong>Effective Rate:</strong> If you know your total monthly sales and total processing fees</li>
+                        <li><strong>Total Fee:</strong> If you know your processor's percentage rate and per-transaction fee</li>
+                    </ul>
+                </li>
+                <li><strong>Step 2:</strong> Enter your sales information and current processing costs</li>
+                <li><strong>Step 3:</strong> Click <strong>"Calculate"</strong> to see your current effective rate</li>
+                <li><strong>Step 4:</strong> Click <strong>"Save Current Rate"</strong> to lock in your current rate for comparison</li>
+                <li><strong>Step 5:</strong> Enter Square's rate (typically 2.6% + 10¢ or 2.9% + 0¢) and click <strong>"Calculate"</strong> again</li>
+                <li><strong>Step 6:</strong> Click <strong>"Save New Rate"</strong> - you'll now see a side-by-side comparison showing your savings!</li>
+                <li><strong>Step 7:</strong> Use the <strong>"Copy Results"</strong> button to share the analysis</li>
+                <li><strong>Step 8:</strong> Scroll to <strong>"Total Yearly Savings Calculator"</strong> to add platform/software fee savings for complete annual savings</li>
             </ol>
         </div>
 
@@ -607,7 +644,10 @@
                         <span class="result-value" id="effectiveEstimatedSavings">$0.00</span>
                     </div>
                 </div>
-                <button class="copy-button" id="copyEffectiveResults" onclick="copyEffectiveResults()">📋 Copy Results to Clipboard</button>
+                <button class="copy-button" id="copyEffectiveResults" onclick="copyEffectiveResults()">
+                    <span>📋</span>
+                    <span>Copy Analysis</span>
+                </button>
 
                 <div id="totalFeeResults" class="hidden">
                     <div class="result-item">
@@ -639,7 +679,10 @@
                         <span class="result-value" id="totalEstimatedSavings">$0.00</span>
                     </div>
                 </div>
-                <button class="copy-button" id="copyTotalResults" onclick="copyTotalResults()">📋 Copy Results to Clipboard</button>
+                <button class="copy-button" id="copyTotalResults" onclick="copyTotalResults()">
+                    <span>📋</span>
+                    <span>Copy Analysis</span>
+                </button>
             </div>
         </div>
     </div>
@@ -1045,8 +1088,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="result-value" id="totalYearlySavings" style="font-size: 2em; font-weight: bold; color: white;">$0.00</span>
             </div>
 
-            <button id="copyResultsBtn" style="width: 100%; margin-top: 20px; padding: 12px; background-color: #006AFF; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.3s;">
-                📋 Copy Results to Clipboard
+            <button class="copy-button" id="copyResultsBtn">
+                <span>📋</span>
+                <span>Copy Full Analysis</span>
             </button>
         </div>
         </div>
@@ -1113,13 +1157,17 @@ Annual Savings: $${(parseFloat(savings.replace('$', '').replace(',', '')) * 12).
         
         navigator.clipboard.writeText(copyText).then(function() {
             const btn = document.getElementById('copyEffectiveResults');
-            const originalText = btn.textContent;
-            btn.textContent = '✅ Copied to Clipboard!';
-            btn.style.backgroundColor = '#28a745';
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span>✅</span><span>Copied!</span>';
+            btn.style.backgroundColor = '#d4edda';
+            btn.style.borderColor = '#28a745';
+            btn.style.color = '#155724';
             
             setTimeout(function() {
-                btn.textContent = originalText;
-                btn.style.backgroundColor = '#006AFF';
+                btn.innerHTML = originalHTML;
+                btn.style.backgroundColor = '#f8f9fa';
+                btn.style.borderColor = '#dee2e6';
+                btn.style.color = '#495057';
             }, 2000);
         }).catch(function(err) {
             alert('Failed to copy: ' + err);
@@ -1144,13 +1192,17 @@ Annual Savings: $${(parseFloat(savings.replace('$', '').replace(',', '')) * 12).
         
         navigator.clipboard.writeText(copyText).then(function() {
             const btn = document.getElementById('copyTotalResults');
-            const originalText = btn.textContent;
-            btn.textContent = '✅ Copied to Clipboard!';
-            btn.style.backgroundColor = '#28a745';
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span>✅</span><span>Copied!</span>';
+            btn.style.backgroundColor = '#d4edda';
+            btn.style.borderColor = '#28a745';
+            btn.style.color = '#155724';
             
             setTimeout(function() {
-                btn.textContent = originalText;
-                btn.style.backgroundColor = '#006AFF';
+                btn.innerHTML = originalHTML;
+                btn.style.backgroundColor = '#f8f9fa';
+                btn.style.borderColor = '#dee2e6';
+                btn.style.color = '#495057';
             }, 2000);
         }).catch(function(err) {
             alert('Failed to copy: ' + err);
@@ -1190,13 +1242,17 @@ Your Savings:
         `.trim();
 
         navigator.clipboard.writeText(copyText).then(function() {
-            const originalText = copyResultsBtn.textContent;
-            copyResultsBtn.textContent = '✅ Copied to Clipboard!';
-            copyResultsBtn.style.backgroundColor = '#28a745';
+            const originalHTML = copyResultsBtn.innerHTML;
+            copyResultsBtn.innerHTML = '<span>✅</span><span>Copied!</span>';
+            copyResultsBtn.style.backgroundColor = '#d4edda';
+            copyResultsBtn.style.borderColor = '#28a745';
+            copyResultsBtn.style.color = '#155724';
             
             setTimeout(function() {
-                copyResultsBtn.textContent = originalText;
-                copyResultsBtn.style.backgroundColor = '#006AFF';
+                copyResultsBtn.innerHTML = originalHTML;
+                copyResultsBtn.style.backgroundColor = '#f8f9fa';
+                copyResultsBtn.style.borderColor = '#dee2e6';
+                copyResultsBtn.style.color = '#495057';
             }, 2000);
         }).catch(function(err) {
             alert('Failed to copy: ' + err);
