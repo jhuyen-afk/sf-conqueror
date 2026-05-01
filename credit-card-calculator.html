@@ -809,8 +809,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- SaaS Cost Savings Calculator Section -->
     <div class="calculator-section" style="margin-top: 60px;">
-        <h2 style="text-align: center; color: #000000; margin-bottom: 10px;">SaaS Cost Savings Calculator</h2>
-        <p style="text-align: center; color: #6c757d; margin-bottom: 30px;">Calculate your savings by switching from SaaS to Square</p>
+        <h2 style="text-align: center; color: #000000; margin-bottom: 10px;">Total Yearly Savings Calculator</h2>
+        <p style="text-align: center; color: #6c757d; margin-bottom: 30px;">See how much you save per year by switching to Square</p>
         
         <div class="input-group">
             <label for="saasMonthlyFee">Current SaaS Monthly Fee</label>
@@ -821,102 +821,75 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
 
         <div class="input-group">
-            <label for="saasProcessingRate">SaaS Processing Rate (%)</label>
-            <div class="input-with-prefix">
-                <input type="number" id="saasProcessingRate" placeholder="0.00" step="0.01" min="0" max="100">
-                <span class="input-suffix">%</span>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label for="saasMonthlySales">Monthly Sales Volume</label>
+            <label for="squareSaasFee">Square SaaS Fee</label>
             <div class="input-with-prefix">
                 <span class="input-prefix">$</span>
-                <input type="number" id="saasMonthlySales" placeholder="0.00" step="0.01" min="0">
+                <input type="number" id="squareSaasFee" value="0.00" step="0.01" min="0" readonly style="background-color: #f8f9fa;">
             </div>
         </div>
 
         <div class="input-group">
-            <label for="squareProcessingRate">Square Processing Rate (%)</label>
+            <label for="monthlyProcessingSavings">Monthly Processing Savings (from calculator above)</label>
             <div class="input-with-prefix">
-                <input type="number" id="squareProcessingRate" placeholder="2.90" step="0.01" min="0" max="100" value="2.90">
-                <span class="input-suffix">%</span>
+                <span class="input-prefix">$</span>
+                <input type="number" id="monthlyProcessingSavings" placeholder="0.00" step="0.01" min="0">
             </div>
+            <small style="color: #6c757d; font-size: 0.875rem; margin-top: 0.25rem; display: block;">
+                Use the "Estimated Savings" from either calculator above
+            </small>
         </div>
 
-        <button class="calculate-btn" id="calculateSaasBtn">Calculate Savings</button>
+        <button class="calculate-btn" id="calculateSaasBtn">Calculate Total Yearly Savings</button>
 
         <div class="results-section" id="saasResults" style="display: none;">
-            <h3>Results</h3>
+            <h3>Total Yearly Savings</h3>
             
             <div class="result-item">
-                <span class="result-label">Current SaaS Total Cost:</span>
-                <span class="result-value" id="saasCurrentTotal">$0.00</span>
+                <span class="result-label">SaaS Fee Savings (per year):</span>
+                <span class="result-value" id="saasFeeYearlySavings">$0.00</span>
             </div>
 
             <div class="result-item">
-                <span class="result-label">Square Total Cost:</span>
-                <span class="result-value" id="squareTotal">$0.00</span>
+                <span class="result-label">Processing Fee Savings (per year):</span>
+                <span class="result-value" id="processingYearlySavings">$0.00</span>
             </div>
 
-            <div class="result-item highlight">
-                <span class="result-label">Monthly Savings:</span>
-                <span class="result-value" id="saasMonthlySavings">$0.00</span>
-            </div>
-
-            <div class="result-item highlight">
-                <span class="result-label">Yearly Savings:</span>
-                <span class="result-value" id="saasYearlySavings" style="font-size: 1.3em; font-weight: bold;">$0.00</span>
+            <div class="result-item highlight" style="border-top: 2px solid #006AFF; padding-top: 15px; margin-top: 15px;">
+                <span class="result-label" style="font-size: 1.2em;">TOTAL YEARLY SAVINGS:</span>
+                <span class="result-value" id="totalYearlySavings" style="font-size: 1.5em; font-weight: bold; color: #006AFF;">$0.00</span>
             </div>
         </div>
     </div>
 
     <script>
-    // SaaS Calculator Logic
+    // SaaS Yearly Savings Calculator Logic
     const calculateSaasBtn = document.getElementById('calculateSaasBtn');
     const saasResults = document.getElementById('saasResults');
     const saasMonthlyFee = document.getElementById('saasMonthlyFee');
-    const saasProcessingRate = document.getElementById('saasProcessingRate');
-    const saasMonthlySales = document.getElementById('saasMonthlySales');
-    const squareProcessingRate = document.getElementById('squareProcessingRate');
-    const saasCurrentTotal = document.getElementById('saasCurrentTotal');
-    const squareTotal = document.getElementById('squareTotal');
-    const saasMonthlySavings = document.getElementById('saasMonthlySavings');
-    const saasYearlySavings = document.getElementById('saasYearlySavings');
+    const monthlyProcessingSavings = document.getElementById('monthlyProcessingSavings');
+    const saasFeeYearlySavings = document.getElementById('saasFeeYearlySavings');
+    const processingYearlySavings = document.getElementById('processingYearlySavings');
+    const totalYearlySavings = document.getElementById('totalYearlySavings');
 
     calculateSaasBtn.addEventListener('click', function() {
-        const monthlyFee = parseFloat(saasMonthlyFee.value) || 0;
-        const saasRate = parseFloat(saasProcessingRate.value) || 0;
-        const sales = parseFloat(saasMonthlySales.value) || 0;
-        const squareRate = parseFloat(squareProcessingRate.value) || 2.90;
+        const currentSaasFee = parseFloat(saasMonthlyFee.value) || 0;
+        const processingSavings = parseFloat(monthlyProcessingSavings.value) || 0;
 
         // Validate inputs
-        if (sales <= 0) {
-            alert('Please enter a valid monthly sales volume');
+        if (currentSaasFee <= 0 && processingSavings <= 0) {
+            alert('Please enter at least one value');
             return;
         }
 
-        // Calculate SaaS total cost
-        const saasProcessingFee = sales * (saasRate / 100);
-        const saasTotalCost = monthlyFee + saasProcessingFee;
-
-        // Calculate Square total cost (no monthly fee)
-        const squareProcessingFee = sales * (squareRate / 100);
-        const squareTotalCost = squareProcessingFee;
-
-        // Calculate savings
-        const monthlySavings = saasTotalCost - squareTotalCost;
-        const yearlySavings = monthlySavings * 12;
+        // Calculate yearly savings
+        const saasFeeYearly = currentSaasFee * 12; // Square has $0 SaaS fee
+        const processingYearly = processingSavings * 12;
+        const totalYearly = saasFeeYearly + processingYearly;
 
         // Display results
-        saasCurrentTotal.textContent = formatCurrency(saasTotalCost);
-        squareTotal.textContent = formatCurrency(squareTotalCost);
-        saasMonthlySavings.textContent = formatCurrency(monthlySavings);
-        saasYearlySavings.textContent = formatCurrency(yearlySavings);
-
-        // Color code savings
-        saasMonthlySavings.style.color = monthlySavings > 0 ? '#006AFF' : '#DC3545';
-        saasYearlySavings.style.color = yearlySavings > 0 ? '#006AFF' : '#DC3545';
+        saasFeeYearlySavings.textContent = formatCurrency(saasFeeYearly);
+        processingYearlySavings.textContent = formatCurrency(processingYearly);
+        totalYearlySavings.textContent = formatCurrency(totalYearly);
 
         saasResults.style.display = 'block';
     });
