@@ -817,56 +817,72 @@ document.addEventListener('DOMContentLoaded', function() {
             <p style="text-align: center; color: #6c757d; margin-bottom: 30px;">See how much you save per year by switching to Square</p>
         
         <div class="input-group">
-            <label for="currentProcessingCost">Current Processing Cost (Monthly)</label>
+            <label for="currentProcessingCost">What You Currently Pay for Processing</label>
             <div class="input-with-prefix">
                 <span class="input-prefix">$</span>
                 <input type="number" id="currentProcessingCost" placeholder="0.00" step="0.01" min="0">
             </div>
+            <small style="color: #6c757d; font-size: 0.875rem; margin-top: 0.25rem; display: block;">
+                Monthly processing fees from your current processor (or use "Estimated Savings" from calculator above)
+            </small>
         </div>
 
         <div class="input-group">
-            <label for="squareProcessingCost">Square Processing Cost (Monthly)</label>
+            <label for="squareProcessingCost">What You'd Pay with Square</label>
             <div class="input-with-prefix">
                 <span class="input-prefix">$</span>
                 <input type="number" id="squareProcessingCost" placeholder="0.00" step="0.01" min="0">
             </div>
+            <small style="color: #6c757d; font-size: 0.875rem; margin-top: 0.25rem; display: block;">
+                Use the calculator above to estimate Square's processing costs
+            </small>
         </div>
 
         <div class="input-group">
-            <label for="saasMonthlyFee">Current SaaS Monthly Fee</label>
+            <label for="saasMonthlyFee">Current Platform/Software Fee</label>
             <div class="input-with-prefix">
                 <span class="input-prefix">$</span>
                 <input type="number" id="saasMonthlyFee" placeholder="0.00" step="0.01" min="0">
             </div>
+            <small style="color: #6c757d; font-size: 0.875rem; margin-top: 0.25rem; display: block;">
+                Monthly subscription for Shopify, Wix, Clover, etc. (Enter 0 if none)
+            </small>
         </div>
 
         <div class="input-group">
-            <label for="squareSaasFee">Square SaaS Fee</label>
+            <label for="squareSaasFee">Square Platform Fee</label>
             <div class="input-with-prefix">
                 <span class="input-prefix">$</span>
-                <input type="number" id="squareSaasFee" placeholder="0.00" step="0.01" min="0">
+                <input type="number" id="squareSaasFee" placeholder="0.00" step="0.01" min="0" value="0">
             </div>
+            <small style="color: #6c757d; font-size: 0.875rem; margin-top: 0.25rem; display: block;">
+                Square Free: $0 | Square Plus: $29 | Square Premium: Custom pricing
+            </small>
         </div>
 
         <button class="calculate-btn" id="calculateSaasBtn">Calculate Total Yearly Savings</button>
 
         <div class="results-section" id="saasResults" style="display: none;">
-            <h3>Total Yearly Savings</h3>
+            <h3 style="color: #000; margin-bottom: 20px;">💰 Your Yearly Savings Breakdown</h3>
             
             <div class="result-item">
-                <span class="result-label">SaaS Fee Savings (per year):</span>
-                <span class="result-value" id="saasFeeYearlySavings">$0.00</span>
+                <span class="result-label">Platform/Software Savings:</span>
+                <span class="result-value" id="saasFeeYearlySavings" style="color: #28a745; font-weight: 600;">$0.00</span>
             </div>
 
             <div class="result-item">
-                <span class="result-label">Processing Fee Savings (per year):</span>
-                <span class="result-value" id="processingYearlySavings">$0.00</span>
+                <span class="result-label">Processing Fee Savings:</span>
+                <span class="result-value" id="processingYearlySavings" style="color: #28a745; font-weight: 600;">$0.00</span>
             </div>
 
-            <div class="result-item highlight" style="border-top: 2px solid #006AFF; padding-top: 15px; margin-top: 15px;">
-                <span class="result-label" style="font-size: 1.2em;">TOTAL YEARLY SAVINGS:</span>
-                <span class="result-value" id="totalYearlySavings" style="font-size: 1.5em; font-weight: bold; color: #006AFF;">$0.00</span>
+            <div class="result-item highlight" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); padding: 20px; border-radius: 12px; margin-top: 20px; color: white;">
+                <span class="result-label" style="font-size: 1.2em; color: white;">🎉 TOTAL YEARLY SAVINGS:</span>
+                <span class="result-value" id="totalYearlySavings" style="font-size: 2em; font-weight: bold; color: white;">$0.00</span>
             </div>
+
+            <button id="copyResultsBtn" style="width: 100%; margin-top: 20px; padding: 12px; background-color: #006AFF; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.3s;">
+                📋 Copy Results to Clipboard
+            </button>
         </div>
         </div>
         <p class="creator-credit">For Internal Use Only</p>
@@ -912,6 +928,52 @@ document.addEventListener('DOMContentLoaded', function() {
         totalYearlySavings.textContent = formatCurrency(totalYearly);
 
         saasResults.style.display = 'block';
+    });
+
+    // Copy Results to Clipboard
+    const copyResultsBtn = document.getElementById('copyResultsBtn');
+    copyResultsBtn.addEventListener('click', function() {
+        const currentProcessing = parseFloat(currentProcessingCost.value) || 0;
+        const squareProcessing = parseFloat(squareProcessingCost.value) || 0;
+        const currentSaasFee = parseFloat(saasMonthlyFee.value) || 0;
+        const squareFee = parseFloat(squareSaasFee.value) || 0;
+
+        const saasFeeYearly = (currentSaasFee * 12) - (squareFee * 12);
+        const processingYearly = (currentProcessing * 12) - (squareProcessing * 12);
+        const totalYearly = saasFeeYearly + processingYearly;
+
+        const copyText = `
+Square Savings Analysis
+========================
+
+Current Costs (Annual):
+• Platform/Software: ${formatCurrency(currentSaasFee * 12)}
+• Processing Fees: ${formatCurrency(currentProcessing * 12)}
+• Total: ${formatCurrency((currentSaasFee * 12) + (currentProcessing * 12))}
+
+With Square (Annual):
+• Platform/Software: ${formatCurrency(squareFee * 12)}
+• Processing Fees: ${formatCurrency(squareProcessing * 12)}
+• Total: ${formatCurrency((squareFee * 12) + (squareProcessing * 12))}
+
+Your Savings:
+• Platform/Software Savings: ${formatCurrency(saasFeeYearly)}
+• Processing Fee Savings: ${formatCurrency(processingYearly)}
+• TOTAL YEARLY SAVINGS: ${formatCurrency(totalYearly)}
+        `.trim();
+
+        navigator.clipboard.writeText(copyText).then(function() {
+            const originalText = copyResultsBtn.textContent;
+            copyResultsBtn.textContent = '✅ Copied to Clipboard!';
+            copyResultsBtn.style.backgroundColor = '#28a745';
+            
+            setTimeout(function() {
+                copyResultsBtn.textContent = originalText;
+                copyResultsBtn.style.backgroundColor = '#006AFF';
+            }, 2000);
+        }).catch(function(err) {
+            alert('Failed to copy: ' + err);
+        });
     });
     </script>
 </body>
