@@ -813,6 +813,22 @@ document.addEventListener('DOMContentLoaded', function() {
             <p style="text-align: center; color: #6c757d; margin-bottom: 30px;">See how much you save per year by switching to Square</p>
         
         <div class="input-group">
+            <label for="currentProcessingCost">Current Processing Cost (Monthly)</label>
+            <div class="input-with-prefix">
+                <span class="input-prefix">$</span>
+                <input type="number" id="currentProcessingCost" placeholder="0.00" step="0.01" min="0">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="squareProcessingCost">Square Processing Cost (Monthly)</label>
+            <div class="input-with-prefix">
+                <span class="input-prefix">$</span>
+                <input type="number" id="squareProcessingCost" placeholder="0.00" step="0.01" min="0">
+            </div>
+        </div>
+
+        <div class="input-group">
             <label for="saasMonthlyFee">Current SaaS Monthly Fee</label>
             <div class="input-with-prefix">
                 <span class="input-prefix">$</span>
@@ -826,17 +842,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="input-prefix">$</span>
                 <input type="number" id="squareSaasFee" placeholder="0.00" step="0.01" min="0">
             </div>
-        </div>
-
-        <div class="input-group">
-            <label for="monthlyProcessingSavings">Monthly Processing Savings (from calculator above)</label>
-            <div class="input-with-prefix">
-                <span class="input-prefix">$</span>
-                <input type="number" id="monthlyProcessingSavings" placeholder="0.00" step="0.01" min="0">
-            </div>
-            <small style="color: #6c757d; font-size: 0.875rem; margin-top: 0.25rem; display: block;">
-                Use the "Estimated Savings" from either calculator above
-            </small>
         </div>
 
         <button class="calculate-btn" id="calculateSaasBtn">Calculate Total Yearly Savings</button>
@@ -867,27 +872,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // SaaS Yearly Savings Calculator Logic
     const calculateSaasBtn = document.getElementById('calculateSaasBtn');
     const saasResults = document.getElementById('saasResults');
+    const currentProcessingCost = document.getElementById('currentProcessingCost');
+    const squareProcessingCost = document.getElementById('squareProcessingCost');
     const saasMonthlyFee = document.getElementById('saasMonthlyFee');
     const squareSaasFee = document.getElementById('squareSaasFee');
-    const monthlyProcessingSavings = document.getElementById('monthlyProcessingSavings');
     const saasFeeYearlySavings = document.getElementById('saasFeeYearlySavings');
     const processingYearlySavings = document.getElementById('processingYearlySavings');
     const totalYearlySavings = document.getElementById('totalYearlySavings');
 
     calculateSaasBtn.addEventListener('click', function() {
+        const currentProcessing = parseFloat(currentProcessingCost.value) || 0;
+        const squareProcessing = parseFloat(squareProcessingCost.value) || 0;
         const currentSaasFee = parseFloat(saasMonthlyFee.value) || 0;
         const squareFee = parseFloat(squareSaasFee.value) || 0;
-        const processingSavings = parseFloat(monthlyProcessingSavings.value) || 0;
 
         // Validate inputs
-        if (currentSaasFee <= 0 && processingSavings <= 0) {
-            alert('Please enter at least one value');
+        if (currentProcessing <= 0 && currentSaasFee <= 0) {
+            alert('Please enter at least one current cost value');
             return;
         }
 
         // Calculate yearly savings
-        const saasFeeYearly = (currentSaasFee * 12) - (squareFee * 12); // Current annual cost - Square annual cost
-        const processingYearly = processingSavings * 12;
+        // (Current SaaS × 12) - (Square SaaS × 12)
+        const saasFeeYearly = (currentSaasFee * 12) - (squareFee * 12);
+        
+        // (Current Processing × 12) - (Square Processing × 12)
+        const processingYearly = (currentProcessing * 12) - (squareProcessing * 12);
+        
+        // Total savings
         const totalYearly = saasFeeYearly + processingYearly;
 
         // Display results
