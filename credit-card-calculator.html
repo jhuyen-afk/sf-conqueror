@@ -30,7 +30,7 @@
             background-image: url('square-pattern.svg');
             background-repeat: repeat;
             background-size: 1024px 200px;
-            opacity: 0.06;
+            opacity: 0.15;
             z-index: -1;
             pointer-events: none;
         }
@@ -463,10 +463,12 @@
         <h1>Processing Fee Calculator</h1>
         <p class="subtitle">Calculate your savings with Square</p>
 
-        <!-- How to Use Section -->
+        <!-- How to Use Section (Collapsible) -->
         <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #006AFF;">
-            <h3 style="margin: 0 0 1rem 0; color: #006AFF; font-size: 1.1rem;">📘 How to Use This Calculator</h3>
-            <ol style="margin: 0; padding-left: 1.5rem; color: #4A4A4A; line-height: 1.8;">
+            <h3 onclick="toggleHowToUse()" style="margin: 0; color: #006AFF; font-size: 1.1rem; cursor: pointer; user-select: none;">
+                📘 How to Use This Calculator <span id="howToUseToggle" style="float: right;">▼</span>
+            </h3>
+            <ol id="howToUseContent" style="display: none; margin: 1rem 0 0 0; padding-left: 1.5rem; color: #4A4A4A; line-height: 1.8;">
                 <li><strong>Step 1:</strong> Choose between "Effective Rate" or "Total Fee" calculator</li>
                 <li><strong>Step 2:</strong> Enter your current processing details (sales, rates, fees)</li>
                 <li><strong>Step 3:</strong> Enter Square's processing details for comparison</li>
@@ -1102,6 +1104,19 @@ Your Savings:
             alert('Failed to copy: ' + err);
         });
     });
+
+    // Toggle How to Use section
+    function toggleHowToUse() {
+        const content = document.getElementById('howToUseContent');
+        const toggle = document.getElementById('howToUseToggle');
+        if (content.style.display === 'none') {
+            content.style.display = 'block';
+            toggle.textContent = '▲';
+        } else {
+            content.style.display = 'none';
+            toggle.textContent = '▼';
+        }
+    }
     </script>
 </body>
 </html>
